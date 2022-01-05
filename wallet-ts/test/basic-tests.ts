@@ -5,60 +5,60 @@ import { request } from 'needle'
 import * as WalletServer from '../lib/index'
 
 
-export async function basicTests() {
+export function basicTests() {
   console.debug('basicTests()')
 
-  await WalletServer.GetVersion().then(r => {
+  WalletServer.GetVersion().then(r => {
     console.debug('GetVersion()', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.IsEmpty().then(r => {
+  WalletServer.IsEmpty().then(r => {
     console.debug('IsEmpty()', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetBalance(true).then(r => {
+  WalletServer.GetBalance(true).then(r => {
     console.debug('GetBalance() in sats', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetBalance(false).then(r => {
+  WalletServer.GetBalance(false).then(r => {
     console.debug('GetBalance() in BTC', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.WalletInfo().then(r => {
+  WalletServer.WalletInfo().then(r => {
     console.debug('WalletInfo()', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetConfirmedBalance(true).then(r => {
+  WalletServer.GetConfirmedBalance(true).then(r => {
     console.debug('GetConfirmedBalance() in sats', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetConfirmedBalance(false).then(r => {
+  WalletServer.GetConfirmedBalance(false).then(r => {
     console.debug('GetConfirmedBalance() in BTC', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetUnconfirmedBalance(true).then(r => {
+  WalletServer.GetUnconfirmedBalance(true).then(r => {
     console.debug('GetUnconfirmedBalance() in sats', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetUnconfirmedBalance(false).then(r => {
+  WalletServer.GetUnconfirmedBalance(false).then(r => {
     console.debug('GetUnconfirmedBalance() in BTC', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetBalances(true).then(r => {
+  WalletServer.GetBalances(true).then(r => {
     console.debug('GetBalances() in sats', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetBalances(false).then(r => {
+  WalletServer.GetBalances(false).then(r => {
     console.debug('GetBalances() in BTC', r)
     assert.ifError(r.error)
   })
@@ -72,7 +72,7 @@ export async function basicTests() {
   const TEST_LABEL_2 = 'test label'
 
   // Should it be possible to create a new address without a label?
-  await WalletServer.GetNewAddress(TEST_LABEL).then(async (r) => {
+  WalletServer.GetNewAddress(TEST_LABEL).then(async (r) => {
     console.debug('GetNewAddress()', r)
 
     const address = <string>r.result
@@ -82,29 +82,29 @@ export async function basicTests() {
     //   console.debug('LabelAddress()', result)
     // })
 
-    await WalletServer.GetAddressLabels(address).then(r => {
+    WalletServer.GetAddressLabels(address).then(r => {
       console.debug('GetAddressLabels()', r)
       assert.ifError(r.error)
       assert(r.result)
       assert(r.result[0] === TEST_LABEL)
     })
 
-    await WalletServer.DropAddressLabels(address).then(r => {
+    WalletServer.DropAddressLabels(address).then(r => {
       console.debug('DropAddressLabels()', r)
       assert.ifError(r.error)
     })
 
-    await WalletServer.GetAddressLabels(address).then(r => {
+    WalletServer.GetAddressLabels(address).then(r => {
       console.debug('GetAddressLabels()', r)
       assert.ifError(r.error)
     })
 
-    await WalletServer.LabelAddress(address, TEST_LABEL_2).then(r => {
+    WalletServer.LabelAddress(address, TEST_LABEL_2).then(r => {
       console.debug('LabelAddress()', r)
       assert.ifError(r.error)
     })
 
-    await WalletServer.GetAddressLabels(address).then(r => {
+    WalletServer.GetAddressLabels(address).then(r => {
       console.debug('GetAddressLabels()', r)
       assert.ifError(r.error)
       assert(r.result)
@@ -124,35 +124,35 @@ export async function basicTests() {
   //   console.debug('LockUnspent()', result)
   // })
 
-  await WalletServer.GetDLCs().then(r => {
+  WalletServer.GetDLCs().then(r => {
     console.debug('GetDLCs()', r)
   })
 
   // TODO : More DLC Fns
 
-  await WalletServer.GetUTXOs().then(r => {
+  WalletServer.GetUTXOs().then(r => {
     console.debug('GetUTXOs()', r)
     if (r && r.result && r.result.length > 0) {
       console.debug('[0]:', r.result[0]);
     }
   })
 
-  await WalletServer.ListReservedUTXOs().then(r => {
+  WalletServer.ListReservedUTXOs().then(r => {
     console.debug('ListReservedUTXOs()', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetAddresses().then(r => {
+  WalletServer.GetAddresses().then(r => {
     console.debug('GetAddresses()', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetSpentAddresses().then(r => {
+  WalletServer.GetSpentAddresses().then(r => {
     console.debug('GetSpentAddresses()', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetFundedAddresses().then(r => {
+  WalletServer.GetFundedAddresses().then(r => {
     console.debug('GetFundedAddresses()', r)
     assert.ifError(r.error)
     assert(r.result)
@@ -162,12 +162,12 @@ export async function basicTests() {
     }
   })
 
-  await WalletServer.GetUnusedAddresses().then(r => {
+  WalletServer.GetUnusedAddresses().then(r => {
     console.debug('GetUnusedAddresses()', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetAccounts().then(async (r) => {
+  WalletServer.GetAccounts().then(async (r) => {
     console.debug('GetAccounts()', r)
     assert.ifError(r.error)
     assert(r.result)
@@ -175,7 +175,7 @@ export async function basicTests() {
     // What can I do with these results?
   })
 
-  await WalletServer.GetAddressInfo('tb1qw70ssz2a2y87v0cp2ue2nvam8gdyz053f8j5j6').then(r => {
+  WalletServer.GetAddressInfo('tb1qw70ssz2a2y87v0cp2ue2nvam8gdyz053f8j5j6').then(r => {
     console.debug('GetAddressInfo()', r)
     assert.ifError(r.error)
   })
@@ -186,12 +186,12 @@ export async function basicTests() {
   //   assert.ifError(r.error)
   // })
 
-  await WalletServer.EstimateFee().then(r => {
+  WalletServer.EstimateFee().then(r => {
     console.debug('EstimateFee()', r)
     assert.ifError(r.error)
   })
 
-  await WalletServer.GetDLCWalletAccounting().then(r => {
+  WalletServer.GetDLCWalletAccounting().then(r => {
     console.debug('GetDLCWalletAccounting()', r)
     assert.ifError(r.error)
   })

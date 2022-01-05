@@ -5,10 +5,10 @@ import { request } from 'needle'
 import * as WalletServer from '../lib/index'
 
 
-export async function networkTests() {
+export function networkTests() {
   console.debug('networkTests()')
 
-  await WalletServer.GetPeers().then(r => {
+  WalletServer.GetPeers().then(r => {
     console.debug('GetPeers()', r)
     assert.ifError(r.error)
   })

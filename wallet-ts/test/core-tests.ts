@@ -16,10 +16,10 @@ const numericAttestmentHex = 'fdd868fd01fd0c6e756d657269634576656e74a305b66d790e
 const enumAnnouncementHex = 'fdd824a8823cf7a3e449260f46d3d9a5bb0ddf1a367e0d3c9ce8858e16cd783392560bd1c9671314d54b6cb258bc6d85ab8fe238a27feb5a27d75323524a54d712a80b70a305b66d790ea4afe15b3fb61cae4d77f050e57b41f10f530c48a23dddbe335afdd822440001c3b0ecdaeaa3bbbd53386dec623b3a884b0ca2e2777cc62f0b6f891d9226114d614ebae0fdd80611000205546f64617908546f6d6f72726f7708546f6d6f72726f77'
 const enumAttestmentHex = 'fdd8687108546f6d6f72726f77a305b66d790ea4afe15b3fb61cae4d77f050e57b41f10f530c48a23dddbe335a0001c3b0ecdaeaa3bbbd53386dec623b3a884b0ca2e2777cc62f0b6f891d9226114dd34e99c8bc6cbeb109e576da6cb6ba1d36bc42883a7ba415cf0d07625421242b05546f646179'
 
-export async function coreTests() {
+export function coreTests() {
   console.debug('coreTests()')
 
-  await WalletServer.DecodeOffer(enumOfferHex).then(r => {
+  WalletServer.DecodeOffer(enumOfferHex).then(r => {
     console.debug('DecodeOffer()', r)
     assert.ifError(r.error)
 
@@ -33,7 +33,7 @@ export async function coreTests() {
     }
   })
 
-  await WalletServer.DecodeOffer(numericOfferHex).then(r => {
+  WalletServer.DecodeOffer(numericOfferHex).then(r => {
     console.debug('DecodeOffer()', r)
     assert.ifError(r.error)
 
@@ -53,7 +53,7 @@ export async function coreTests() {
   //   assert.ifError(r.error)
   // })
 
-  await WalletServer.DecodeAnnouncement(enumAnnouncementHex).then(r => {
+  WalletServer.DecodeAnnouncement(enumAnnouncementHex).then(r => {
     console.debug('DecodeAnnouncement()', r)
     assert.ifError(r.error)
 
@@ -63,12 +63,12 @@ export async function coreTests() {
     }
   })
 
-  await WalletServer.DecodeAttestments(enumAttestmentHex).then(r => {
+  WalletServer.DecodeAttestments(enumAttestmentHex).then(r => {
     console.debug('DecodeAttestments()', r)
     assert.ifError(r.error)
   })
   
-  await WalletServer.DecodeAnnouncement(numericAnnouncementHex).then(r => {
+  WalletServer.DecodeAnnouncement(numericAnnouncementHex).then(r => {
     console.debug('DecodeAnnouncement()', r)
     assert.ifError(r.error)
 
@@ -78,7 +78,7 @@ export async function coreTests() {
     }
   })
   
-  await WalletServer.DecodeAttestments(numericAttestmentHex).then(r => {
+  WalletServer.DecodeAttestments(numericAttestmentHex).then(r => {
     console.debug('DecodeAttestments()', r)
     assert.ifError(r.error)
   })
