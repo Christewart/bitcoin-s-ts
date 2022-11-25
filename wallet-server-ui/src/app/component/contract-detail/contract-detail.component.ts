@@ -93,7 +93,7 @@ export class ContractDetailComponent implements OnInit {
 
   private setUnits() {
     if (this.isNumeric()) {
-      this.units = (<NumericEventDescriptor>this.contractInfo.oracleInfo.announcement.event.descriptor).unit
+      this.units = (<NumericEventDescriptor>this.contractInfo.oracleInfo.single.announcement.event.descriptor).unit
     } else {
       this.units = ''
     }
@@ -159,7 +159,7 @@ export class ContractDetailComponent implements OnInit {
   buildChart() {
     if (this.isNumeric()) {
       this.chartData = this.chartService.getChartData()
-      const unit = (<NumericEventDescriptor>this.contractInfo.oracleInfo.announcement.event.descriptor).unit
+      const unit = (<NumericEventDescriptor>this.contractInfo.oracleInfo.single.announcement.event.descriptor).unit
       this.chartOptions = this.chartService.getChartOptions(unit)
       this.updateChartData()
     }
@@ -314,7 +314,7 @@ export class ContractDetailComponent implements OnInit {
   
           if (r.result) { // closingTxId
             const txId = r.result
-            const eventId = this.contractInfo.oracleInfo.announcement.event.eventId
+            const eventId = this.contractInfo.oracleInfo.single.announcement.event.eventId
             // this.refreshDLCState() // No longer necessary with Websockets
             const dialog = this.dialog.open(ConfirmationDialogComponent, {
               data: {
@@ -386,7 +386,7 @@ export class ContractDetailComponent implements OnInit {
 
     const contractId = this.dlc.contractId
     const txId = <string>this.dlc.fundingTxId
-    const eventId = this.contractInfo.oracleInfo.announcement.event.eventId
+    const eventId = this.contractInfo.oracleInfo.single.announcement.event.eventId
 
     this.executing = true
     this.rebroadcasting = true
@@ -441,7 +441,7 @@ export class ContractDetailComponent implements OnInit {
     console.debug('onRebroadcastClosingTransaction()')
 
     const txId = this.dlc.closingTxId
-    const eventId = this.contractInfo.oracleInfo.announcement.event.eventId
+    const eventId = this.contractInfo.oracleInfo.single.announcement.event.eventId
 
     if (txId) {
       this.executing = true

@@ -94,7 +94,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptions = []
     let sub = this.walletStateService.stateLoaded.subscribe((loaded: boolean) => {
       if (loaded) {
-        console.debug('stateLoaded:', this.router.url, 'loaded:', loaded)
+        console.debug('@@stateLoaded:@@', this.router.url, 'loaded:', loaded)
         // Check current route and set route based on wallet and dlc state after initialization
         if (this.router.url.startsWith('/login')) {
           if (this.dlcService.dlcs.value.length > 0) {

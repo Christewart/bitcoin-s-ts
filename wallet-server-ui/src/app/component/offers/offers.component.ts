@@ -88,9 +88,9 @@ export class OffersComponent implements OnInit, AfterViewInit, OnDestroy {
       const offerWithHex = this.getOffer(offer.hash)
       switch (property) {
         case 'eventId':
-          return offerWithHex && offerWithHex.offer.contractInfo.oracleInfo.announcement.event.eventId
+          return offerWithHex && offerWithHex.offer.contractInfo.oracleInfo.single.announcement.event.eventId
         case 'maturity':
-          return offerWithHex && offerWithHex.offer.contractInfo.oracleInfo.announcement.event.maturity
+          return offerWithHex && offerWithHex.offer.contractInfo.oracleInfo.single.announcement.event.maturity
         case 'totalCollateral':
           return offerWithHex && offerWithHex.offer.contractInfo.totalCollateral
         case 'collateral':

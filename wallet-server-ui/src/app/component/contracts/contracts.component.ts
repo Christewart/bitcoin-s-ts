@@ -60,8 +60,10 @@ export class ContractsComponent implements OnInit, AfterViewInit, OnDestroy {
   contractDetailsVisible = false
   selectedContact: string|null = null
 
-  getContractInfo(dlcId: string) {
-    return this.dlcService.contractInfos.value[dlcId]
+  getContractInfo(dlcId: string): ContractInfo {
+    const result = this.dlcService.contractInfos.value[dlcId]
+    console.log("getContractInfo.result", result)
+    return result.singleContractInfo
   }
 
   getContractId(dlcId: string) {
@@ -101,7 +103,7 @@ export class ContractsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.sortingDataAccessor = (dlc: DLCContract, property: string) => {
       switch (property) {
         case 'eventId':
-          return this.getContractInfo(dlc.dlcId)?.oracleInfo?.announcement?.event?.eventId
+          return this.getContractInfo(dlc.dlcId)?.oracleInfo?.single?.announcement?.event?.eventId
         case 'realizedPNL':
           return dlc.pnl
         default:
@@ -183,7 +185,7 @@ export class ContractsComponent implements OnInit, AfterViewInit, OnDestroy {
     console.debug('onRowClick()', dlcContract, this.dlcService.contractInfos.value[dlcContract.dlcId])
 
     this.selectedDLCContract = dlcContract
-    this.selectedDLCContractInfo = this.dlcService.contractInfos.value[dlcContract.dlcId]
+    this.selectedDLCContractInfo = this.dlcService.contractInfos.value[dlcContract.dlcId].singleContractInfo
     // this.selectedDLC.emit(<DLCContractInfo>{
     //   dlc: dlcContract,
     //   contractInfo: this.selectedDLCContractInfo,

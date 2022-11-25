@@ -59,7 +59,7 @@ export class NewOfferComponent implements OnInit {
   private _contractInfo!: ContractInfoWithHex
   @Input() set contractInfo (contractInfo: ContractInfoWithHex) {
     this._contractInfo = contractInfo
-    this.event = contractInfo.contractInfo.oracleInfo.announcement.event
+    this.event = contractInfo.contractInfo.oracleInfo.single.announcement.event
     this.reset()
   }
   get contractInfo() { return this._contractInfo }
@@ -76,7 +76,7 @@ export class NewOfferComponent implements OnInit {
     if (this.announcement) {
       cd = <EnumEventDescriptor>this.announcement.announcement.event.descriptor
     } else { // contractInfo
-      cd = <EnumEventDescriptor>this.contractInfo.contractInfo.oracleInfo.announcement.event.descriptor
+      cd = <EnumEventDescriptor>this.contractInfo.contractInfo.oracleInfo.single.announcement.event.descriptor
     }
     return cd.outcomes !== undefined
   }
@@ -86,7 +86,7 @@ export class NewOfferComponent implements OnInit {
     if (this.announcement) {
       cd = <NumericEventDescriptor>this.announcement.announcement.event.descriptor
     } else { // contractInfo
-      cd = <NumericEventDescriptor>this.contractInfo.contractInfo.oracleInfo.announcement.event.descriptor
+      cd = <NumericEventDescriptor>this.contractInfo.contractInfo.oracleInfo.single.announcement.event.descriptor
     }
     return cd.base !== undefined
   }
@@ -343,7 +343,7 @@ export class NewOfferComponent implements OnInit {
     console.debug('onExecute()')
 
     // this.contractInfo.hex is no good, need announcement hex from this.contractInfo
-    const hex = this.announcement ? this.announcement.hex : this.contractInfo.contractInfo.oracleInfo.announcement.hex
+    const hex = this.announcement ? this.announcement.hex : this.contractInfo.contractInfo.oracleInfo.single.announcement.hex
     const v = this.form.value
     const totalCollateral = v.totalCollateral
 

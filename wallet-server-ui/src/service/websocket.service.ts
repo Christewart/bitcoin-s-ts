@@ -188,7 +188,8 @@ export class WebsocketService {
       case WebsocketMessageType.dlcstatechange:
         if (this.walletStateService.isServerReady()) {
           const dlc = <DLCContract>message.payload
-          const contractInfo = this.dlcService.contractInfos.value[dlc.dlcId]
+          const singleContractInfo = this.dlcService.contractInfos.value[dlc.dlcId]
+          const contractInfo = singleContractInfo.singleContractInfo
           console.debug(' dlc:', dlc)
           const obs = this.dlcService.replaceDLC(dlc)
           let goToContract = false
@@ -208,7 +209,7 @@ export class WebsocketService {
                 data: {
                   title: 'dialog.broadcastSuccess.title',
                   content: 'dialog.broadcastSuccess.content',
-                  params: { txId: dlc.fundingTxId, eventId: contractInfo.oracleInfo.announcement.event.eventId },
+                  params: { txId: dlc.fundingTxId, eventId: contractInfo.oracleInfo.single.announcement.event.eventId },
                   linksContent: "dialog.broadcastSuccess.linksContent",
                   links: [this.walletStateService.mempoolTransactionURL(<string>dlc.fundingTxId, this.walletStateService.getNetwork())],
                   action: 'action.close',

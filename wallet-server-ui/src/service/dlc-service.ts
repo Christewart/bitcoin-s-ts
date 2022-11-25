@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators'
 
 import { MessageService } from '~service/message.service'
 
-import { ContractInfo, CoreMessageType, DLCContract, ServerResponse, WalletMessageType } from '~type/wallet-server-types'
+import { ContractInfo, SingleContractInfo, CoreMessageType, DLCContract, ServerResponse, WalletMessageType } from '~type/wallet-server-types'
 
 import { getMessageBody } from '~util/wallet-server-util'
 
@@ -18,8 +18,8 @@ export class DLCService {
   initialized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
   dlcs: BehaviorSubject<DLCContract[]> = new BehaviorSubject<DLCContract[]>([])
-  contractInfos: BehaviorSubject<{ [dlcId: string]: ContractInfo }> = 
-    new BehaviorSubject<{ [dlcId: string]: ContractInfo }>({})
+  contractInfos: BehaviorSubject<{ [dlcId: string]: SingleContractInfo }> = 
+    new BehaviorSubject<{ [dlcId: string]: SingleContractInfo }>({})
 
   constructor(private messageService: MessageService, private dialog: MatDialog) {}
 
@@ -93,10 +93,10 @@ export class DLCService {
     }
     return forkJoin(dlcs.map(dlc => 
       this.messageService.sendMessage(getMessageBody(CoreMessageType.decodecontractinfo, [dlc.contractInfo]))))
-      .subscribe((results: ServerResponse<ContractInfo>[]) => {
+      .subscribe((results: ServerResponse<SingleContractInfo>[]) => {
         // console.debug(' loadContractInfos()', results)
         for (let i = 0; i < results.length; i++) {
-          ci[dlcs[i].dlcId] = <ContractInfo>results[i].result
+          ci[dlcs[i].dlcId] = <SingleContractInfo>results[i].result
         }
         this.contractInfos.next(this.contractInfos.value)
         this.initialized.next(true)

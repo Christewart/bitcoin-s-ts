@@ -377,10 +377,14 @@ export interface Offer {
   temporaryContractId: string // "ae51b65d7f9a8d6fc76dadda9d315bab1a96c7aa2c7c9a851b764a1907036450"
 }
 
+export interface SingleContractInfo {
+  singleContractInfo: ContractInfo
+}
+
 export interface ContractInfo {
   totalCollateral: number,
   contractDescriptor: EnumContractDescriptor|NumericContractDescriptor
-  oracleInfo: OracleInfo
+  oracleInfo: SingleOracleInfo
 }
 
 export interface FundingInput {
@@ -416,6 +420,10 @@ export interface PayoutFunctionPoint {
   payout: number // 25000,
   extraPrecision: number // 0,
   isEndpoint: boolean // true
+}
+
+export interface SingleOracleInfo {
+  single: OracleInfo
 }
 
 export interface OracleInfo {

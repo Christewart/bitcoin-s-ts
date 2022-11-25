@@ -82,11 +82,11 @@ export class AcceptOfferComponent implements OnInit {
   }
 
   get announcement() {
-    return this.offer.offer.contractInfo.oracleInfo.announcement
+    return this.offer.offer.contractInfo.oracleInfo.single.announcement
   }
 
   get event() {
-    return this.offer.offer.contractInfo.oracleInfo.announcement.event
+    return this.offer.offer.contractInfo.oracleInfo.single.announcement.event
   }
 
 
@@ -161,7 +161,7 @@ export class AcceptOfferComponent implements OnInit {
     this.maturityDate = formatISODateTime(this.event.maturity)
     this.refundDate = formatDateTime(this.offer.offer.refundLocktime)
     if (this.isNumeric()) {
-      this.units = (<NumericEventDescriptor>this.contractInfo.oracleInfo.announcement.event.descriptor).unit
+      this.units = (<NumericEventDescriptor>this.contractInfo.oracleInfo.single.announcement.event.descriptor).unit
     } else {
       this.units = ''
     }
