@@ -57,10 +57,10 @@ export class AcceptOfferComponent implements OnInit {
   get offer() { return this._offer }
 
   get contractInfo() {
-    return this.offer.offer.contractInfo
+    return this.offer.offer.singleContractInfo.contractInfo
   }
   get contractDescriptor() {
-    return this.offer.offer.contractInfo.contractDescriptor
+    return this.offer.offer.singleContractInfo.contractInfo.contractDescriptor
   }
 
   isEnum() {
@@ -74,19 +74,19 @@ export class AcceptOfferComponent implements OnInit {
   }
 
   get enumContractDescriptor() {
-    return <EnumContractDescriptor>this.offer.offer.contractInfo.contractDescriptor
+    return <EnumContractDescriptor>this.offer.offer.singleContractInfo.contractInfo.contractDescriptor
   }
 
   get numericContractDescriptor() {
-    return <NumericContractDescriptor>this.offer.offer.contractInfo.contractDescriptor
+    return <NumericContractDescriptor>this.offer.offer.singleContractInfo.contractInfo.contractDescriptor
   }
 
   get announcement() {
-    return this.offer.offer.contractInfo.oracleInfo.single.announcement
+    return this.offer.offer.singleContractInfo.contractInfo.oracleInfo.single.oracleAnnouncement
   }
 
   get event() {
-    return this.offer.offer.contractInfo.oracleInfo.single.announcement.event
+    return this.offer.offer.singleContractInfo.contractInfo.oracleInfo.single.oracleAnnouncement.event
   }
 
 
@@ -161,7 +161,7 @@ export class AcceptOfferComponent implements OnInit {
     this.maturityDate = formatISODateTime(this.event.maturity)
     this.refundDate = formatDateTime(this.offer.offer.refundLocktime)
     if (this.isNumeric()) {
-      this.units = (<NumericEventDescriptor>this.contractInfo.oracleInfo.single.announcement.event.descriptor).unit
+      this.units = (<NumericEventDescriptor>this.contractInfo.oracleInfo.single.oracleAnnouncement.event.descriptor).unit
     } else {
       this.units = ''
     }

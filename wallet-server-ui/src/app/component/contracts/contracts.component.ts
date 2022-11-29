@@ -62,8 +62,8 @@ export class ContractsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getContractInfo(dlcId: string): ContractInfo {
     const result = this.dlcService.contractInfos.value[dlcId]
-    console.log("getContractInfo.result", result)
-    return result.singleContractInfo
+    console.log("getContractInfo.result", JSON.stringify(result.contractInfo))
+    return result.contractInfo
   }
 
   getContractId(dlcId: string) {
@@ -103,7 +103,8 @@ export class ContractsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.sortingDataAccessor = (dlc: DLCContract, property: string) => {
       switch (property) {
         case 'eventId':
-          return this.getContractInfo(dlc.dlcId)?.oracleInfo?.single?.announcement?.event?.eventId
+          const x = this.getContractInfo(dlc.dlcId)?.oracleInfo?.single?.oracleAnnouncement?.event?.eventId
+          return x
         case 'realizedPNL':
           return dlc.pnl
         default:
@@ -185,7 +186,7 @@ export class ContractsComponent implements OnInit, AfterViewInit, OnDestroy {
     console.debug('onRowClick()', dlcContract, this.dlcService.contractInfos.value[dlcContract.dlcId])
 
     this.selectedDLCContract = dlcContract
-    this.selectedDLCContractInfo = this.dlcService.contractInfos.value[dlcContract.dlcId].singleContractInfo
+    this.selectedDLCContractInfo = this.dlcService.contractInfos.value[dlcContract.dlcId].contractInfo
     // this.selectedDLC.emit(<DLCContractInfo>{
     //   dlc: dlcContract,
     //   contractInfo: this.selectedDLCContractInfo,

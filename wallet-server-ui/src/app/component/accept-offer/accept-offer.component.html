@@ -20,7 +20,7 @@
     <fieldset>
       <mat-form-field class="w-100">
         <mat-label translate>acceptOffer.eventId</mat-label>
-        <input matInput [value]="contractInfo.oracleInfo.single.announcement.event.eventId" readonly>
+        <input matInput [value]="contractInfo.oracleInfo.single.oracleAnnouncement.event.eventId" readonly>
       </mat-form-field>
 
       <div class="mat-form-field-row">
@@ -117,8 +117,8 @@
         </mat-form-field>
         <mat-form-field class="ellipsis">
           <mat-label translate>acceptOffer.oraclePublicKey</mat-label>
-          <input matInput [value]="contractInfo.oracleInfo.single.announcement.publicKey" readonly>
-          <button mat-icon-button matSuffix (click)="copyToClipboard(contractInfo.oracleInfo.single.announcement.publicKey)"><mat-icon>content_copy</mat-icon></button>
+          <input matInput [value]="contractInfo.oracleInfo.single.oracleAnnouncement.publicKey" readonly>
+          <button mat-icon-button matSuffix (click)="copyToClipboard(contractInfo.oracleInfo.single.oracleAnnouncement.publicKey)"><mat-icon>content_copy</mat-icon></button>
         </mat-form-field>
       </div>
 

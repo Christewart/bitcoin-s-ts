@@ -362,7 +362,7 @@ export interface Accept {
 export interface Offer {
   contractFlags: string // '0'
   chainHash: string // '43497fd7f826957108f4a30fd9cec3aeba79972084e90ead01ea330900000000',
-  contractInfo: ContractInfo
+  singleContractInfo: SingleContractInfo
   fundingPubKey: string // '0384ff93088a11a6348b1a62068dec6fbde06c27cdd13343fe8799064b0c729a2d',
   payoutSPK: string // '160014a6ddd2eaa6a442c89bd1b3d9121fb63c535dd79a',
   payoutSerialId: number // 5529711572335517000,
@@ -378,11 +378,11 @@ export interface Offer {
 }
 
 export interface SingleContractInfo {
-  singleContractInfo: ContractInfo
+  totalCollateral: number
+  contractInfo: ContractInfo
 }
 
 export interface ContractInfo {
-  totalCollateral: number,
   contractDescriptor: EnumContractDescriptor|NumericContractDescriptor
   oracleInfo: SingleOracleInfo
 }
@@ -427,7 +427,7 @@ export interface SingleOracleInfo {
 }
 
 export interface OracleInfo {
-  announcement: Announcement
+  oracleAnnouncement: Announcement
 }
 
 // EO core-types.ts

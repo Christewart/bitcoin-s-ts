@@ -94,10 +94,11 @@ export class DLCService {
     return forkJoin(dlcs.map(dlc => 
       this.messageService.sendMessage(getMessageBody(CoreMessageType.decodecontractinfo, [dlc.contractInfo]))))
       .subscribe((results: ServerResponse<SingleContractInfo>[]) => {
-        // console.debug(' loadContractInfos()', results)
+        console.debug('loadContractInfos.decodecontractinfo()', results)
         for (let i = 0; i < results.length; i++) {
           ci[dlcs[i].dlcId] = <SingleContractInfo>results[i].result
         }
+        console.debug("Done with for loop in loadContractInfos.decodecontractinfo()")
         this.contractInfos.next(this.contractInfos.value)
         this.initialized.next(true)
       })
