@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators'
 
 import { MessageService } from '~service/message.service'
 
-import { ContractInfo, SingleContractInfo, CoreMessageType, DLCContract, ServerResponse, WalletMessageType } from '~type/wallet-server-types'
+import { ContractInfo, SingleContractInfo, CoreMessageType, DLCContract, ServerResponse, WalletMessageType, DecodedContractInfo} from '~type/wallet-server-types'
 
 import { getMessageBody } from '~util/wallet-server-util'
 
@@ -93,12 +93,12 @@ export class DLCService {
     }
     return forkJoin(dlcs.map(dlc => 
       this.messageService.sendMessage(getMessageBody(CoreMessageType.decodecontractinfo, [dlc.contractInfo]))))
-      .subscribe((results: ServerResponse<SingleContractInfo>[]) => {
-        console.debug('loadContractInfos.decodecontractinfo()', results)
+      .subscribe((results: ServerResponse<DecodedContractInfo>[]) => {
+        console.log('loadContractInfos.decodecontractinfo()', results)
         for (let i = 0; i < results.length; i++) {
-          ci[dlcs[i].dlcId] = <SingleContractInfo>results[i].result
+          ci[dlcs[i].dlcId] = <SingleContractInfo>results[i].result?.singleContractInfo
         }
-        console.debug("Done with for loop in loadContractInfos.decodecontractinfo()")
+        console.log("Done with for loop in loadContractInfos.decodecontractinfo()")
         this.contractInfos.next(this.contractInfos.value)
         this.initialized.next(true)
       })

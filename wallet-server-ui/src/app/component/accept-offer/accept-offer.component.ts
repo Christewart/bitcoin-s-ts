@@ -56,8 +56,8 @@ export class AcceptOfferComponent implements OnInit {
   }
   get offer() { return this._offer }
 
-  get contractInfo() {
-    return this.offer.offer.singleContractInfo.contractInfo
+  get singleContractInfo() {
+    return this.offer.offer.singleContractInfo
   }
   get contractDescriptor() {
     return this.offer.offer.singleContractInfo.contractInfo.contractDescriptor
@@ -130,7 +130,7 @@ export class AcceptOfferComponent implements OnInit {
       const data = []
       for (const p of this.numericContractDescriptor.payoutFunction.points) {
         // Inverting payout values
-        data.push({ x: p.outcome, y: this.contractInfo.totalCollateral - p.payout })
+        data.push({ x: p.outcome, y: this.singleContractInfo.totalCollateral - p.payout })
       }
       this.chartData.datasets[0].data = data
       if (this.chart) {
@@ -161,7 +161,7 @@ export class AcceptOfferComponent implements OnInit {
     this.maturityDate = formatISODateTime(this.event.maturity)
     this.refundDate = formatDateTime(this.offer.offer.refundLocktime)
     if (this.isNumeric()) {
-      this.units = (<NumericEventDescriptor>this.contractInfo.oracleInfo.single.oracleAnnouncement.event.descriptor).unit
+      this.units = (<NumericEventDescriptor>this.singleContractInfo.contractInfo.oracleInfo.single.oracleAnnouncement.event.descriptor).unit
     } else {
       this.units = ''
     }

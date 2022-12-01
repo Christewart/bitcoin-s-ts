@@ -11,7 +11,7 @@ import { DLCFileService } from '~service/dlc-file.service'
 import { DLCService } from '~service/dlc-service'
 import { WalletStateService } from '~service/wallet-state-service'
 
-import { Contact, ContractInfo, DLCContract } from '~type/wallet-server-types'
+import { Contact, ContractInfo, DLCContract, SingleContractInfo } from '~type/wallet-server-types'
 import { AcceptWithHex, SignWithHex } from '~type/wallet-ui-types'
 
 import { copyToClipboard, formatISODate, formatNumber, formatPercent, formatShortHex } from '~util/utils'
@@ -61,8 +61,9 @@ export class ContractsComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedContact: string|null = null
 
   getContractInfo(dlcId: string): ContractInfo {
-    const result = this.dlcService.contractInfos.value[dlcId]
-    console.log("getContractInfo.result", JSON.stringify(result.contractInfo))
+    const result: SingleContractInfo = this.dlcService.contractInfos.value[dlcId]
+    console.log("getContractInfo.result", JSON.stringify(result))
+    console.log("getContactInfo.contractInfo", JSON.stringify(result.contractInfo))
     return result.contractInfo
   }
 

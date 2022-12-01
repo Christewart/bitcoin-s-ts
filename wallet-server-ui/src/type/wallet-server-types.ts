@@ -377,6 +377,10 @@ export interface Offer {
   temporaryContractId: string // "ae51b65d7f9a8d6fc76dadda9d315bab1a96c7aa2c7c9a851b764a1907036450"
 }
 
+export interface DecodedContractInfo {
+  singleContractInfo: SingleContractInfo
+}
+
 export interface SingleContractInfo {
   totalCollateral: number
   contractInfo: ContractInfo
